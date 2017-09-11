@@ -2,6 +2,9 @@
 An simple tool for file/directory deletion.
 
 简单的文件/文件夹删除工具。
+
+[Download](https://github.com/differentrain/DeletionTool/raw/master/release/DeletionTool.zip)
+
 * * *
 ## Note 须知
  
