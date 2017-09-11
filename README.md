@@ -11,4 +11,5 @@ An simple tool supports for file/directory deletion.
 
 `DeletionTool` can delete the file/directory is currently in use or end with special characters, such as `..`, But make it clear that you know what you are doing when using it.
 
-`DeletionTool` 可以删除正在使用的文件或文件夹，或其以特殊的字符结尾——比如`..`， 但在使用时请认识到自己实在做什么。
+
+`DeletionTool` 可以删除正在使用的文件或文件夹，或其以特殊的字符结尾——比如`..`， 但在使用时请清楚地认识到自己是在做什么。
