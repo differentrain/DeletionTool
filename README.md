@@ -1,13 +1,13 @@
 # DeletionTool
-An simple tool supports for the deletion of file/directory that is in use or end with special characters: such as one or more " "(space), or two or more "."(dot).
+An simple tool supports for file/directory deletion.
 
-简单的文件/文件夹删除工具，文件/文件夹可以正被使用，或以特殊的字符结尾：如一个及以上的" "(空格)，或两个及以上的"."(点)。
-
+简单的文件/文件夹删除工具。
+ 
 [Download](https://github.com/differentrain/DeletionTool/raw/master/release/DeletionTool.zip)
 
 * * *
 ## Note 须知
 
-Make it clear that you know what you are doing！
+DeletionTool can delete the file/directory is currently in use or end with special characters, such as `..`, But make it clear that you know what you are doing when using it.
 
-请弄清楚到你在做什么！
+DeletionTool可以删除正在使用的文件或文件夹，或其以特殊的字符结尾——比如`..`， 但在使用时请认识到自己实在做什么。
