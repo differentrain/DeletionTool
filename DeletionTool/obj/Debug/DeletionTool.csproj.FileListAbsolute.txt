@@ -1,0 +1,10 @@
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\bin\Debug\DeletionTool.exe.config
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\bin\Debug\DeletionTool.exe
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\bin\Debug\DeletionTool.pdb
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Debug\DeletionTool.FormFixPath.resources
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Debug\DeletionTool.FormMain.resources
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Debug\DeletionTool.Properties.Resources.resources
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Debug\DeletionTool.csproj.GenerateResource.Cache
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Debug\DeletionTool.csproj.CoreCompileInputs.cache
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Debug\DeletionTool.exe
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Debug\DeletionTool.pdb

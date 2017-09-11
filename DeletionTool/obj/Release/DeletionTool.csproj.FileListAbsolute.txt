@@ -1,0 +1,11 @@
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\bin\Release\DeletionTool.exe.config
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\bin\Release\DeletionTool.exe
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\bin\Release\DeletionTool.pdb
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Release\DeletionTool.FormFixPath.resources
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Release\DeletionTool.FormMain.resources
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Release\DeletionTool.Properties.Resources.resources
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Release\DeletionTool.csproj.GenerateResource.Cache
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Release\DeletionTool.csproj.CoreCompileInputs.cache
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Release\DeletionTool.exe
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Release\DeletionTool.pdb
+Z:\data\Works\LocalGit\DeletionTool\DeletionTool\obj\Release\DeletionTool.csprojResolveAssemblyReference.cache
