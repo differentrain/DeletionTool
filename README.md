@@ -4,7 +4,7 @@ An simple tool supports for file/directory deletion.
 简单的文件/文件夹删除工具。
 
 
-[Download](https://github.com/differentrain/DeletionTool/raw/master/release/DeletionTool.zip)
+[Download](https://github.com/differentrain/DeletionTool/raw/master/src/DeletionTool/bin/Release/DeletionTool.zip)
 
 * * *
 ## Note 须知
