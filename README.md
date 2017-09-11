@@ -1,7 +1,7 @@
 # DeletionTool
-An simple tool supports for file/directory deletion.
+A gadget for file/directory deletion.
 
-简单的文件/文件夹删除工具。
+删除文件/文件夹的小工具。
 
 
 [Download](https://github.com/differentrain/DeletionTool/raw/master/src/DeletionTool/bin/Release/DeletionTool.zip)
