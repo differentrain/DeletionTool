@@ -20,6 +20,10 @@ Windows下的删除文件/文件夹的小工具。
 
 ## Demonstrate 演示
  
+![image](https://github.com/differentrain/DeletionTool/raw/master/imgs/333.gif)
+ 
+***
+ 
 ![image](https://github.com/differentrain/DeletionTool/raw/master/imgs/11111.gif)
  
 ***
