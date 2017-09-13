@@ -8,9 +8,9 @@ Windows下的删除文件/文件夹的小工具。
 
 ## Updates 更新 
 
-2017.09.12  New Functionality: drag&drop files or(and) directories on exe, program shoud delete object without GUI, instead of the system sound of "EmptyRecycleBin".
+`2017.09.12`  New Functionality: drag&drop files or(and) directories on exe, program shoud delete object without GUI, instead of the system sound of "EmptyRecycleBin".
 
-2017.09.12  新增功能: 拖拽文件或(和)文件夹到exe上面，程序会在不使用GUI的情况下将其删除, 并播放系统声音"EmptyRecycleBin".
+`2017.09.12`  新增功能:  拖拽文件或(和)文件夹到exe上面，程序会在不使用GUI的情况下将其删除, 并播放系统声音"EmptyRecycleBin".
 
 ## Notice 须知
 
@@ -20,6 +20,10 @@ Windows下的删除文件/文件夹的小工具。
 
 ## Demonstrate 演示
  
+![image](https://github.com/differentrain/DeletionTool/raw/master/imgs/333.gif)
+ 
+***
+ 
 ![image](https://github.com/differentrain/DeletionTool/raw/master/imgs/11111.gif)
  
 ***
