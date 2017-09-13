@@ -68,16 +68,16 @@ namespace YYProject.AdvancedDeletion
         private const Int32 ERROR_MORE_DATA = 234;
         #endregion
 
-        #region The fields below is thread-safe in this project.
-        private static StringBuilder _SessionKey = new StringBuilder(Marshal.SizeOf(Guid.NewGuid()) * 2 + 1);
-        private static StringBuilder _DosDeviceName = new StringBuilder(260);
-        #endregion
+
+
+        private static StringBuilder _DosDeviceName = new StringBuilder(260); //thread-safe in this project.
+
 
         public static Boolean TryRmStartSession(out UInt32 sessionHandle, out String sessionKey)
         {
-            _SessionKey.Clear();
-            var error = RmStartSession(out  sessionHandle, 0, _SessionKey);
-            sessionKey = _SessionKey.ToString();
+            var session = new StringBuilder(Marshal.SizeOf(Guid.NewGuid()) * 2 + 1);
+            var error = RmStartSession(out sessionHandle, 0, session);
+            sessionKey = session.ToString();
             return error == 0 ? true : false;
         }
 
@@ -88,7 +88,7 @@ namespace YYProject.AdvancedDeletion
 
         public static Boolean TryRmGetList(UInt32 sessionHandle, out RmRebootReason rebootReasons, out RmProcessInfo[] affectedApps)
         {
-            affectedApps =null;
+            affectedApps = null;
             var nCount = 0U;
             var error = RmGetList(sessionHandle, out var nlength, ref nCount, affectedApps, out rebootReasons);
             while (error == ERROR_MORE_DATA)
@@ -277,7 +277,7 @@ namespace YYProject.AdvancedDeletion
             return true;
         }
 
-  
+
         public static Boolean RemoveDirectory(String path, out Boolean isOccupied)
         {
             if (!RemoveDirectoryW(path))

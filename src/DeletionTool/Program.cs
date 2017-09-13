@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Media;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using YYProject.AdvancedDeletion;
 
@@ -32,10 +33,16 @@ namespace DeletionTool
                 {
                     if (args.Length > 0)
                     {
-                        var path = args[0];
-                        if (AdvancedDeletion.IsExists(path, out var hasDot))
+                        var hasDeleted = false;
+                        Parallel.ForEach<String>(args, item => {
+                            if (AdvancedDeletion.IsExists(item, out var hasDot))
+                            {
+                                hasDeleted = true;
+                                AdvancedDeletion.Delete(item);
+                            }
+                        });
+                        if (hasDeleted)
                         {
-                            AdvancedDeletion.Delete(path);
                             var sound = new SoundPlayer(Registry.CurrentUser.OpenSubKey(@"AppEvents\Schemes\Apps\Explorer\EmptyRecycleBin\.Current", false).GetValue(null) as String);
                             sound.PlaySync();
                         }

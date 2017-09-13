@@ -22,9 +22,6 @@ namespace YYProject.AdvancedDeletion
     {
         private const String _LongPathPrefix = @"\\?\"; //Long path prefix
 
-        private static List<String> _OccupiedFiles = StringListPool.Rent();
-        private static List<String> _OccupiedDirectories = StringListPool.Rent();
-
         /// <summary>
         /// Delete a file or directory.
         /// </summary>
@@ -55,26 +52,28 @@ namespace YYProject.AdvancedDeletion
             return false;
         }
 
-
         private static void InnerDeleteObject(String path)
         {
-            _OccupiedFiles.Clear();
-            _OccupiedDirectories.Clear();
             path = @"\\?\" + path; //UNC Path
             var objType = GetPathType(path);
             if (!objType.HasValue)
             {
                 return;
             }
+
+            var occupiedFiles = StringListPool.Rent();
+            var occupiedDirectories = StringListPool.Rent();
             if (objType.Value.dwFileAttributes.HasFlag(FileAttributes.Directory))
             {
-                InnerDeleteDirectory(path);
+                InnerDeleteDirectory(path, occupiedFiles, occupiedDirectories);
             }
             else
             {
-                InnerDeleteFile(path, objType.Value.dwFileAttributes);
-                DeleteOccupiedFiles();
+                InnerDeleteFile(path, objType.Value.dwFileAttributes, occupiedFiles);
+                DeleteOccupiedFiles(occupiedFiles);
             }
+            StringListPool.Return(occupiedFiles);
+            StringListPool.Return(occupiedDirectories);
         }
         // File or directory or invalid path?
         private static Win32FileAttributeData? GetPathType(String path)
@@ -89,7 +88,7 @@ namespace YYProject.AdvancedDeletion
             return null;
         }
 
-        private static void InnerDeleteFile(String path, FileAttributes fileAttributes)
+        private static void InnerDeleteFile(String path, FileAttributes fileAttributes, List<String> occupiedFiles)
         {
             if (fileAttributes.HasFlag(FileAttributes.ReadOnly))
             {
@@ -98,36 +97,36 @@ namespace YYProject.AdvancedDeletion
             }
             if (!NativeAPI.DeleteFile(path, out var occupied) && occupied)
             {
-                _OccupiedFiles.Add(path);
+                occupiedFiles.Add(path);
             }
         }
 
         //Notice that win api FindFirstFile does not support the path end with "\".
-        private static void InnerDeleteDirectory(String path)
+        private static void InnerDeleteDirectory(String path, List<String> occupiedFiles, List<String> occupiedDirectories)
         {
-            var dirList = TraverseDirectory(path);  // Traverse directory and delete files. 
-            DeleteOccupiedFiles(); //Delete occupied files
+            var dirList = TraverseDirectory(path, occupiedFiles);  // Traverse directory and delete files. 
+            DeleteOccupiedFiles(occupiedFiles); //Delete occupied files
             foreach (var item in dirList) //Delete directories.
             {
                var b= NativeAPI.RemoveDirectory(item,out var occupied);
                 if (occupied)
                 {
-                    _OccupiedDirectories.Add(item);
+                    occupiedDirectories.Add(item);
                 }
             }
-            DeleteOccupiedDirectories(dirList); //Delete occupied directories. 
+            DeleteOccupiedDirectories(dirList, occupiedDirectories); //Delete occupied directories. 
         }
 
-        private static Stack<String> TraverseDirectory(String path)
+        private static Stack<String> TraverseDirectory(String path, List<String> occupiedFiles)
         {
             var paths = StringListPool.Rent();
             var result = new Stack<String>();
             paths.Add(path);
-            TraverseDirectoryPower(paths, result);
+            TraverseDirectoryPower(paths, result, occupiedFiles);
             return result;
         }
 
-        private static void TraverseDirectoryPower(List<String> paths, Stack<String> allPaths)
+        private static void TraverseDirectoryPower(List<String> paths, Stack<String> allPaths, List<String> occupiedFiles)
         {
             if (paths == null)
             {
@@ -136,12 +135,12 @@ namespace YYProject.AdvancedDeletion
             Parallel.ForEach<String>(paths, item =>
             {
                 allPaths.Push(item);
-                TraverseDirectoryPower(GetDirectories(item), allPaths);
+                TraverseDirectoryPower(GetDirectories(item,occupiedFiles), allPaths, occupiedFiles);
             });
             StringListPool.Return(paths);
         }
 
-        private static List<String> GetDirectories(String path)
+        private static List<String> GetDirectories(String path, List<String> occupiedFiles)
         {
             List<String> paths;
             String findPath;
@@ -158,7 +157,7 @@ namespace YYProject.AdvancedDeletion
 
                     if (!findInfo.FileAttributes.dwFileAttributes.HasFlag(FileAttributes.Directory))
                     {
-                        InnerDeleteFile(findPath, findInfo.FileAttributes.dwFileAttributes);
+                        InnerDeleteFile(findPath, findInfo.FileAttributes.dwFileAttributes, occupiedFiles);
                     }
                     else if (findInfo.cFileName != ".." && findInfo.cFileName != ".") //ignores ".." or "." .
                     {
@@ -178,26 +177,24 @@ namespace YYProject.AdvancedDeletion
             return paths.ToList();
         }
 
-        private static void DeleteOccupiedFiles()
+        private static void DeleteOccupiedFiles(List<String> occupiedFiles)
         {
-            if (_OccupiedFiles.Count > 0)
+            if (occupiedFiles.Count > 0)
             {
-                Unlocker.ReleaseObjects(_OccupiedFiles.ToArray());
-               
-                foreach (var item in _OccupiedFiles)
+                Unlocker.ReleaseObjects(occupiedFiles.ToArray());
+                foreach (var item in occupiedFiles)
                 {
                     NativeAPI.DeleteFile(item, out var kd);
-                
                 }
             }
         
         }
 
-        private static void DeleteOccupiedDirectories(Stack<String> paths)
+        private static void DeleteOccupiedDirectories(Stack<String> paths, List<String> occupiedDirectories)
         {
-            if (_OccupiedDirectories.Count > 0)
+            if (occupiedDirectories.Count > 0)
             {
-                Unlocker.ReleaseObjects(_OccupiedDirectories.ToArray(),false);
+                Unlocker.ReleaseObjects(occupiedDirectories.ToArray(),false);
 
                 foreach (var item in paths) //all in list
                 {
