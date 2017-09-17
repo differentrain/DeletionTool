@@ -43,9 +43,11 @@ namespace DeletionTool
                         });
                         if (hasDeleted)
                         {
-                            var sound = new SoundPlayer(Registry.CurrentUser.OpenSubKey(@"AppEvents\Schemes\Apps\Explorer\EmptyRecycleBin\.Current", false).GetValue(null) as String);
-                            sound.PlaySync();
-                        }
+                            using (var sound = new SoundPlayer(Registry.CurrentUser.OpenSubKey(@"AppEvents\Schemes\Apps\Explorer\EmptyRecycleBin\.Current", false).GetValue(null) as String))
+                            {
+                                sound.PlaySync();
+                            }
+                         }
                         return;
                     }
                     Application.EnableVisualStyles();
