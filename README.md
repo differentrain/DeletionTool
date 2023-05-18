@@ -1,8 +1,12 @@
 # DeletionTool
 A gadget for file/directory deletion in Windows.
 
-Windows下的删除文件/文件夹的小工具。
+This repo is archived, use [Delapp](https://github.com/differentrain/Delapp) insteaded.
 
+此仓库已archived，使用[Delapp](https://github.com/differentrain/Delapp)进行代替。
+
+
+Windows下的删除文件/文件夹的小工具。
 
 [Download](https://github.com/differentrain/DeletionTool/raw/master/src/DeletionTool/bin/Release/DeletionTool.zip)
 
